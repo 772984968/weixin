@@ -59,7 +59,37 @@
                     <li>
                         <a class="J_menuItem" href="{{route('feedback.index')}}">意见反馈</a>
                     </li>
-                 </ul>
+                    <li>
+                        <a class="J_menuItem" href="">文章管理</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fa fa fa-bar-chart-o"></i>
+                    <span class="nav-label">管理员管理</span>
+                    <span class="fa arrow"></span>
+                </a>
+                <ul class="nav nav-second-level">
+                    <li>
+                        <a class="J_menuItem" href="#">管理员管理</a>
+                    </li>
+                    <li>
+                        <a class="J_menuItem" href="#">角色管理</a>
+                    </li>
+                    <li>
+                        <a class="J_menuItem" href="#">权限管理</a>
+                    </li>
+                    <li>
+                        <a class="J_menuItem" href="#">数据库管理</a>
+                    </li>
+                    <li>
+                        <a class="J_menuItem" href="#">操作日志</a>
+                    </li>
+                    <li>
+                        <a class="J_menuItem" href="#">登录日志</a>
+                    </li>
+                </ul>
             </li>
             <li>
                 <a href="#">
@@ -74,7 +104,9 @@
                     <li>
                         <a class="J_menuItem" href="{{route('bannerImages.index')}}">轮播图片管理</a>
                     </li>
-
+                    <li>
+                        <a class="J_menuItem" href="{{route('bannerImages.index')}}">优惠券</a>
+                    </li>
                 </ul>
             </li>
             <li>
@@ -127,6 +159,51 @@
                     </li>
                     <li>
                         <a class="J_menuItem" href="{{route('comment.index')}}">评论列表</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fa fa fa-bar-chart-o"></i>
+                    <span class="nav-label">分销管理</span>
+                    <span class="fa arrow"></span>
+                </a>
+                <ul class="nav nav-second-level">
+                    <li>
+                        <a class="J_menuItem" href="">分销账号管理</a>
+                    </li>
+                    <li>
+                        <a class="J_menuItem" href="">分销设置</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fa fa fa-bar-chart-o"></i>
+                    <span class="nav-label">统计图表</span>
+                    <span class="fa arrow"></span>
+                </a>
+                <ul class="nav nav-second-level">
+                    <li>
+                        <a class="J_menuItem" href="">订单报表</a>
+                    </li>
+                    <li>
+                        <a class="J_menuItem" href="">客户报表</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fa fa fa-bar-chart-o"></i>
+                    <span class="nav-label">系统设置</span>
+                    <span class="fa arrow"></span>
+                </a>
+                <ul class="nav nav-second-level">
+                    <li>
+                        <a class="J_menuItem" href="">支付管理</a>
+                    </li>
+                    <li>
+                        <a class="J_menuItem" href="">物流管理</a>
                     </li>
                 </ul>
             </li>
