@@ -31,7 +31,8 @@ Route::group(['prefix'=>'/admin','namespace'=>'Admin'],function(){
            Route::resource('user','UserController');
            //成语管理
            Route::resource('idiom','IdiomController');
-
+           //管理员管理
+           require_once __DIR__.'/admins.php';
            //活动管理
            require_once __DIR__.'/activity.php';
            //分类管理

@@ -72,7 +72,7 @@
                 </a>
                 <ul class="nav nav-second-level">
                     <li>
-                        <a class="J_menuItem" href="#">管理员管理</a>
+                        <a class="J_menuItem" href="{{route('admin.index')}}">管理员管理</a>
                     </li>
                     <li>
                         <a class="J_menuItem" href="#">角色管理</a>
