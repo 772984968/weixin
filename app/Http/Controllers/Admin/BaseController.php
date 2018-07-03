@@ -41,5 +41,12 @@ class BaseController extends Controller
         }
         return true;
     }
+    //验证权限
+    public function checkPermission($permission){
+
+
+        return true;
+
+    }
 
 }

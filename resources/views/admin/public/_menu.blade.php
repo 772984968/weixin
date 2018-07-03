@@ -75,10 +75,10 @@
                         <a class="J_menuItem" href="{{route('admin.index')}}">管理员管理</a>
                     </li>
                     <li>
-                        <a class="J_menuItem" href="#">角色管理</a>
+                        <a class="J_menuItem" href="{{route('roles.index')}}">角色管理</a>
                     </li>
                     <li>
-                        <a class="J_menuItem" href="#">权限管理</a>
+                        <a class="J_menuItem" href="{{route('permission.index')}}">权限管理</a>
                     </li>
                     <li>
                         <a class="J_menuItem" href="#">数据库管理</a>

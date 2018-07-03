@@ -23,6 +23,8 @@ Route::group(['prefix'=>'/admin','namespace'=>'Admin'],function(){
            Route::get('index','IndexController@index')->name('index');
            //后台欢迎页
            Route::get('welcome','IndexController@welcome')->name('welcome');
+           //后台权限页
+           Route::get('permission','IndexController@permission')->name('permission');
            //等级管理
            Route::resource('level','LevelController');
            //意见反馈
@@ -31,6 +33,7 @@ Route::group(['prefix'=>'/admin','namespace'=>'Admin'],function(){
            Route::resource('user','UserController');
            //成语管理
            Route::resource('idiom','IdiomController');
+
            //管理员管理
            require_once __DIR__.'/admins.php';
            //活动管理

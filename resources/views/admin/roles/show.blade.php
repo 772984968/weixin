@@ -11,42 +11,31 @@
     <body>
     <div class="layui-container"layui-bg-gray>
         <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
-            <legend>管理员修改</legend>
+            <legend>添加权限</legend>
         </fieldset>
-        <form class="layui-form" action="{{route('admin.update',[$model->id])}}" method="post">
+        <form class="layui-form" action="{{route('addPermission',['id'=>$model->id])}}" method="post">
             {{ csrf_field() }}
             <div class="layui-form-item">
-                <label class="layui-form-label">管理员名称</label>
+                <label class="layui-form-label">角色名称</label>
                 <div class="layui-input-block">
-                    <input type="text" lay-verify=""  value="{{$model->username}}" name="username"
+                    <input type="text" lay-verify=""  value="{{$model->name}}" name="name" disabled="disabled"
                            placeholder="" autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
-                <label class="layui-form-label">所属角色</label>
+                <label class="layui-form-label">拥有权限</label>
                 <div class="layui-input-block">
-                    <select name="role">
-                        @foreach($roles as $vo)
-                            <option @if(isset($role)&&$role->id==$vo->id) selected @endif value="{{$vo->name}}">{{$vo->name}}</option>
-                        @endforeach
-                    </select>
-                </div>
-            </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">管理员密码</label>
-                <div class="layui-input-block">
-                    <input type="password" lay-verify=""  value="" name="password"
-                           placeholder="" autocomplete="off" class="layui-input">
-                </div>
-            </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">重复密码</label>
-                <div class="layui-input-block">
-                    <input type="password" lay-verify=""  value="" name="password_confirmation"
-                           placeholder="" autocomplete="off" class="layui-input">
+                    @foreach($permission as $item)
+                        <input type="checkbox" value="{{$item->id}}" name="permission[]" lay-skin="primary" title="{{$item->name}}"
+                               @if(in_array($item->id,$roles))
+                                   checked=""
+                                   @endif
+
+
+                        >
+                    @endforeach
 
                 </div>
-
             </div>
 
             <div class="layui-form-item">
@@ -72,7 +61,7 @@
                 var url=$('.layui-form').attr('action');
                 $.ajax({
                     url:url,
-                    type:'PUT',
+                    type:'POST',
                     dataType:'json',
                     data:formdata.field,
                     success:function(data){

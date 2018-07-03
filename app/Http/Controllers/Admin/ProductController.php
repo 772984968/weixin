@@ -118,7 +118,8 @@ class ProductController extends TemplateController
     }
 
     public function show($id)
-    { $model=$this->model::with('images')->find($id);
+    {
+        $model=$this->model::with('images')->find($id);
         $config = $this->config;//获取配置
         //获取类型
         $category=Category::defaultOrder()->ancestorsAndSelf($model->category_id);

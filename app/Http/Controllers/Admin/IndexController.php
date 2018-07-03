@@ -18,5 +18,9 @@ class IndexController extends BaseController
     public  function welcome(){
         return view('admin.index.welcome');
     }
+    //权限
+    public function permission(){
+         return view('admin.message.permission');
+    }
 
 }

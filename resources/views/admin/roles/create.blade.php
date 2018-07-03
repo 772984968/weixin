@@ -8,44 +8,17 @@
     <body>
     <div class="layui-container"layui-bg-gray>
         <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
-            <legend>添加管理员</legend>
+            <legend>添加角色</legend>
         </fieldset>
-        <form class="layui-form" action="{{route('admin.store')}}" method="post">
+        <form class="layui-form" action="{{route('roles.store')}}" method="post">
             {{ csrf_field() }}
             <div class="layui-form-item">
-                <label class="layui-form-label">管理员名称</label>
+                <label class="layui-form-label">角色名称</label>
                 <div class="layui-input-block">
-                    <input type="text" lay-verify=""  value="" name="username"
+                    <input type="text" lay-verify=""  value="" name="name"
                            placeholder="" autocomplete="off" class="layui-input">
                 </div>
             </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">所属角色</label>
-                <div class="layui-input-block">
-                    <select name="role">
-                        @foreach($roles as $role)
-                            <option value="{{$role->name}}">{{$role->name}}</option>
-                            @endforeach
-                    </select>
-                </div>
-            </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">管理员密码</label>
-                <div class="layui-input-block">
-                    <input type="password" lay-verify=""  value="" name="password"
-                           placeholder="" autocomplete="off" class="layui-input">
-                </div>
-            </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">重复密码</label>
-                <div class="layui-input-block">
-                    <input type="password" lay-verify=""  value="" name="password_confirmation"
-                           placeholder="" autocomplete="off" class="layui-input">
-
-                </div>
-
-            </div>
-
             <div class="layui-form-item">
                 <div class="layui-input-block">
                     <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
