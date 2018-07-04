@@ -210,7 +210,7 @@
             <div class="layui-form-item layui-form-text">
                 <label class="layui-form-label">商品详细描述</label>
                 <div class="layui-input-block">
-                    <textarea class="layui-textarea" name="goods_desc" disabled> this is goods desc</textarea>
+                    {!! $model->goods_desc !!}
                 </div>
             </div>
             <!--

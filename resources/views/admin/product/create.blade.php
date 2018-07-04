@@ -162,7 +162,10 @@
             <div class="layui-form-item layui-form-text">
                 <label class="layui-form-label">商品详细描述</label>
                 <div class="layui-input-block">
-                    <textarea  class="layui-textarea" name="goods_desc"> this is goods desc</textarea>
+                    <script id="container" name="goods_desc" type="text/plain" >
+        请填写商品详情
+		</script>
+
                 </div>
             </div>
             <div class="layui-form-item">
@@ -180,6 +183,8 @@
     @section('script')
         @include('admin.layouts._script')
         <script src="{{asset('admin/plugins/layui/layui.all.js')}}"></script>
+        <script src="{{asset('admin/plugins/ueditor/ueditor.config.js')}}"></script>
+        <script src="{{asset('admin/plugins/ueditor/ueditor.all.js')}}"></script>
         <script>
             layui.use('form', function(){
                 var form = layui.form;
@@ -342,6 +347,12 @@
 
             });
         </script>
-
+        <!--百度编辑器 -->
+            <script >
+            var ue = UE.getEditor('container',{
+                initialFrameWidth : 1024,
+                initialFrameHeight: 500
+            });
+        </script>
     @stop
 
