@@ -41,23 +41,46 @@
                                 </button>
                             </div>
                         @endif
-                    <!--
-                                       <div class="demoTable">  搜索：
-                                           <div class="layui-input-inline" >
+                                  {{--搜索--}}
+                            <form class="layui-form">
+                            <div class="layui-form-item">
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">商品名</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" id="goods_name" name="goods_name" lay-verify="required|number" autocomplete="off" class="layui-input">
+                                    </div>
+                                </div>
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">类型</label>
+                                    <div class="layui-input-inline">
+                                        <select name="category_id" id="category_id">
+                                            <option value=""></option>
+                                            @foreach($data['category'] as $cate)
+                                                <option value="{{$cate->id}}">{{$cate->name}}</option>
+                                                @endforeach
 
+                                        </select>
 
-                                               <select name="search" lay-verify="" class="layui-input">
-                                                  <option value=""></option>
-                                               </select>
+                                    </div>
+                                </div>
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">状态</label>
+                                    <div class="layui-input-inline">
+                                        <select name="is_on_sale" id="is_on_sale">
+                                            <option value=""></option>
+                                            <option value="1">已上线</option>
+                                            <option value="0">未上线</option>
+                                        </select>
+                                    </div>
+                                </div>
 
-                        </div>
-                        <div class="layui-inline">
-                            <input class="layui-input" name="id" id="demoReload" autocomplete="off">
-                        </div>
-                        <button class="layui-btn" data-type="reload">搜索</button>
-                    </div>-->
+                            </div>
+                            </form>
+                            <button class="layui-btn" data-type="reload" id="reload">搜索</button>
+                    </div>
                         <table class="layui-hide" id="demo" lay-filter="basedemo"></table>
                         <script type="text/html" id="barDemo">
+                            <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="qrcode">二维码</a>
                             @if(isset($data['config']['show']))
                             <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
                             @endif
@@ -101,6 +124,29 @@
             layer = layui.layer //弹层
                 ,table = layui.table //表格
                 ,form = layui.form;//表单
+
+            //搜索重载
+            $('#reload').on('click', function(){
+                var goods_name=$("#goods_name").val();
+                var category_id=$("#category_id").val();
+                var is_on_sale=$("#is_on_sale").val();
+
+
+                table.reload('testReload',{
+                    where: {
+                        //设定异步数据接口的额外参数，任意设
+                        goods_name: goods_name
+                        ,category_id: category_id
+                        ,is_on_sale: is_on_sale
+
+                    }
+                    ,page: {
+                        curr: 1 //重新从第 1 页开始
+                    }
+                });
+
+            });
+
             //执行一个 table 实例
             table.render({
                 elem: '#demo'
@@ -115,7 +161,11 @@
             //监听工具条
             table.on('tool(basedemo)', function(obj){
                 var data = obj.data;
-                if(obj.event === 'detail'){
+                if(obj.event === 'qrcode'){
+                var url="{{route('qrcode.show',['id'=>':id'])}}".replace(':id',data.id);
+                    layer_show("产品二维码",url);
+                }
+                else if(obj.event === 'detail'){
                     var url="{{route($data['config']['show'],['id'=>':id'])}}".replace(':id',data.id);
                     layer_show("查看详情",url);
                 } else if(obj.event === 'del'){

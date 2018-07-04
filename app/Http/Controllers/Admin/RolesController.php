@@ -8,7 +8,6 @@ use Spatie\Permission\Models\Permission;
 class RolesController extends TemplateController
 {
     protected $model;
-    protected $guard_name='admin';
     public $config=[
         'index'=>'roles.index',//首页
         'create'=>'roles.create',//创建

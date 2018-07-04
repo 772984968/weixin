@@ -95,6 +95,7 @@ class ProductController extends TemplateController
         }
         $data['title'] = $this->getTitle();// 标题
         $data['config'] = $this->config;//获取配置
+        $data['category'] = Category::all();
         return view('admin.product.index', ['data' => $data]);
 
     }
@@ -170,6 +171,28 @@ class ProductController extends TemplateController
     //获取数据
     public function getData($request){
         $model= $this->model;
+        $goods_name=$request->input('goods_name');
+        $category_id=$request->input('category_id');
+        $is_on_sale=$request->input('is_on_sale');
+        if (!empty($goods_name)){
+           $model=$model->where('goods_name','like','%'.$goods_name.'%');
+        }
+
+        if (!empty($category_id)){
+
+            $model=$model->where('category_id',$category_id);
+        }
+
+        if ($is_on_sale!=''){
+
+            $model=$model->where('is_on_sale',$is_on_sale);
+        }
+
+
+
+
+
+
         $limit=$request->limit??'10';
         $count=$model->count();
         $paginate=$model->with('category')->paginate($limit);

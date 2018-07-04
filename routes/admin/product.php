@@ -4,3 +4,6 @@ Route::get('product/detail','ProductController@detail')->name('product.detail');
 Route::post('product/delImage','ProductController@delImage')->name('product.delImage');
 Route::post('product/switchSale','ProductController@switchSale')->name('product.switchSale');
 Route::resource('product','ProductController');
+
+//产品二维码
+Route::resource('qrcode','QrcodeController');
