@@ -42,7 +42,7 @@ class ActivityController extends TemplateController
     }
     function getTitle()
     {
-            return[[
+        return[[
             ['type'=>'checkbox'],
             ['field'=>'id','title'=>'ID','sort'=>'true'],
             ['field'=>'title','title'=>'标题'],

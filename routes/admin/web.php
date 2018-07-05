@@ -48,6 +48,8 @@ Route::group(['prefix'=>'/admin','namespace'=>'Admin'],function(){
            require_once __DIR__.'/comment.php';
            //支付管理
            require_once __DIR__.'/payment.php';
+           //文章管理
+           require_once __DIR__.'/article.php';
 
        });
 

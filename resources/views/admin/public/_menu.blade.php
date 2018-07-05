@@ -60,7 +60,13 @@
                         <a class="J_menuItem" href="{{route('feedback.index')}}">意见反馈</a>
                     </li>
                     <li>
-                        <a class="J_menuItem" href="">文章管理</a>
+                        <a class="J_menuItem" href="">文章管理<span class="fa arrow"></span></a>
+                        <ul class="nav nav-third-level">
+                            <li>
+                                <a class="J_menuItem" href="{{route('articleCategory.index')}}">文章类型管理</a>
+                            </li>
+
+                        </ul>
                     </li>
                 </ul>
             </li>
