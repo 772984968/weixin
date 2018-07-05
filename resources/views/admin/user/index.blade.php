@@ -42,46 +42,23 @@
                                     <i class="layui-icon"></i>
                                 </button>
                             </div>
-
                         {{--搜索--}}
                         <form class="layui-form">
                             <div class="layui-form-item">
                                 <div class="layui-inline">
-                                    <label class="layui-form-label">订单号</label>
+                                    <label class="layui-form-label">会员</label>
                                     <div class="layui-input-inline">
-                                        <input type="text" id="goods_sn" name="goods_name" lay-verify="required|number" autocomplete="off" class="layui-input">
+                                        <input type="text" id="name" name="name" lay-verify="required|number" autocomplete="off" class="layui-input">
                                     </div>
                                 </div>
-                                <div class="layui-inline">
-                                    <label class="layui-form-label">用户名</label>
-                                    <div class="layui-input-inline">
-
-                                        <input type="text" id="user_id" name="user_id" lay-verify="required|number" autocomplete="off" class="layui-input">
-
-                                    </div>
-                                </div>
-                                <div class="layui-inline">
-                                    <label class="layui-form-label">状态</label>
-                                    <div class="layui-input-inline">
-                                        <select name="order_status_id" id="order_status_id">
-                                        <option value=""></option>
-                                            @foreach($data['orderStatus'] as $status)
-                                                <option value="{{$status->id}}">{{$status->status}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-
                             </div>
                         </form>
                         <button class="layui-btn" data-type="reload" id="reload">搜索</button>
                         <table class="layui-hide" id="demo" lay-filter="basedemo"></table>
                         <script type="text/html" id="barDemo">
-                            @if(isset($data['config']['show']))
-                            <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">订单详情</a>
-                            @endif
+                            <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">会员详情</a>
                             @if(isset($data['config']['edit']))
-                            <a class="layui-btn layui-btn-xs" lay-event="edit">修改订单状态</a>
+                            <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
                             @endif
                             @if(isset($data['config']['delete']))
                             <a class="layui-btn layui-btn-xs layui-btn-danger  layui-btn-mini" lay-event="del">删除</a>
@@ -98,17 +75,6 @@
 @section('script')
     @include('admin.layouts._script')
     <script src="{{asset('admin/plugins/layui/layui.all.js')}}"></script>
-    {{--表格模板--}}
-    <script type="text/html" id="userTpl">
-        @{{d.user.name}}
-    </script>
-    {{--表格模板--}}
-    <script type="text/html" id="statusTpl">
-        @{{d.order_status.status}}
-    </script>
-
-
-
 
     <script>
         layui.use(['laydate', 'laypage', 'layer', 'table', 'carousel', 'upload', 'element'], function(){
@@ -116,20 +82,13 @@
                 ,laypage = layui.laypage //分页
             layer = layui.layer //弹层
                 ,table = layui.table //表格
-
             //搜索重载
             $('#reload').on('click', function(){
-                var goods_sn=$("#goods_sn").val();
-                var user_id=$("#user_id").val();
-                var order_status_id=$("#order_status_id").val();
-
-
-                table.reload('testReload',{
+                var name=$("#name").val();
+                  table.reload('testReload',{
                     where: {
                         //设定异步数据接口的额外参数，任意设
-                        goods_sn: goods_sn
-                        ,user_id: user_id
-                        ,order_status_id: order_status_id
+                        name: name
 
                     }
                     ,page: {
@@ -155,6 +114,7 @@
                 if(obj.event === 'detail'){
                     var url="{{route($data['config']['show'],['id'=>':id'])}}".replace(':id',data.id);
                     layer_show("查看详情",url);
+
                 } else if(obj.event === 'del'){
                     @if(isset($data['config']['delete']))
                     layer.confirm('真的删除么', function(index){

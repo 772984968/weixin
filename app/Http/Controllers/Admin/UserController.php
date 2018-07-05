@@ -16,6 +16,7 @@ class UserController extends TemplateController
   //      'create'=>'user.create',//创建
         'store'=>'user.store',//创建保存
         'edit'=>'user.edit',//编辑
+        'show'=>'user.show',//编辑
         'update'=>'user.update',//编辑保存
         'delete'=>'user.destroy',//删除
     ];
@@ -38,6 +39,26 @@ class UserController extends TemplateController
             ['field'=>'right','title'=>'数据操作','align'=>'center','toolbar'=>'#barDemo','width'=>300]
         ]
         ];
+    }
+    public function index(Request $request)
+    {
+        if ($request->ajax()){
+            return response()->json($this->getData($request));
+        }
+
+
+        $data['title'] = $this->getTitle();// 标题
+        $data['config'] = $this->config;//获取配置
+        return view('admin.user.index', compact('data'));
+    }
+    //会员详情
+    public function show($id)
+    {
+        $payment=new PaymentController();
+        $model=$this->model::find($id);
+         $config = $this->config;//获取配置
+        $data['title'] =$payment->getTitle() ;// 标题
+        return view('admin.'.''.$this->config['show'],compact('model','config','data'));
     }
     public function create(){
         return view('admin.user.create');
@@ -81,7 +102,20 @@ class UserController extends TemplateController
             return response()->json(['code' => 200, 'msg' => '修改成功']);
         }
 
+    }
+    //获取数据
+    public function getData($request){
+        $model= $this->model;
+        $name=$request->input('name');
 
+        if (!empty($name)){
+            $model=$model->where('name','like','%'.$name.'%');
+        }
+        $limit=$request->limit??'10';
+        $count=$model->count();
+        $paginate=$model->paginate($limit);
+        $data=$paginate->toArray();
+        return  $data=['code'=>0,'msg'=>'','count'=>$count,'data'=>$data['data']];
     }
 
 

@@ -6,6 +6,7 @@ use App\Models\Goods;
 use App\Models\Order;
 use App\Models\OrderProduct;
 use App\Models\OrderStatus;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -60,6 +61,7 @@ class OrderController extends TemplateController
 
         $data['title'] = $this->getTitle();// 标题
         $data['config'] = $this->config;//获取配置
+        $data['orderStatus'] = OrderStatus::all();
         return view('admin.order.index', compact('data'));
     }
     //展示编辑页
@@ -73,6 +75,26 @@ class OrderController extends TemplateController
     //获取数据
     public function getData($request){
         $model= $this->model;
+        $goods_sn=$request->input('goods_sn');
+        $user_id=$request->input('user_id');
+        $order_status_id=$request->input('order_status_id');
+        if (!empty($goods_sn)){
+            $model=$model->where('goods_sn','like','%'.$goods_sn.'%');
+        }
+
+        if (!empty($user_id)){
+            $user=User::where('name','like','%'.$user_id.'%')->first();
+            $model=$model->where('user_id',$user->id);
+        }
+
+        if ($order_status_id!=''){
+
+            $model=$model->where('order_status_id',$order_status_id);
+        }
+
+
+
+
         $limit=$request->limit??'10';
         $count=$model->count();
         $paginate=$model->with('user','orderStatus')->paginate($limit);
